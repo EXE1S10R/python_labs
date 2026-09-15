@@ -10,8 +10,9 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     Raises:
         ValueError: Если список пустой
     '''
+
     if not (len(nums)):
-        raise ValueError
+        raise ValueError ('пустая строка')
     return (min(nums), max(nums))
 
 
@@ -24,6 +25,7 @@ def unique_sorted(nums: list[float | int]) -> list[float | int]:
     Returns:
         Отсортированный список
     '''
+
     return sorted(set(nums))
 
 
@@ -39,10 +41,11 @@ def flatten(mat: list[list | tuple]) -> list:
     Raises:
         TypeError: Если передана не матрица
     '''
+
     vector = []
     for row in mat:
         if type(row) != list and type(row) != tuple:
-            raise TypeError
+            raise TypeError ('Передана не матрица')
         vector.extend(row)
     return vector
 
