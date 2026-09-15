@@ -1,0 +1,77 @@
+from scr.lib.often_func import is_matrix_full
+
+
+def transpose(mat: list[list[float | int]]) -> list[list]:
+    '''Меняет строки и столбцы местами
+
+    Args:
+        mat: Матрица
+
+    Returns:
+        trans: Транспонированная матрица
+
+    Raises:
+        ValueError: Строки разной длины
+    '''
+
+    if not (is_matrix_full(mat)):
+        raise ValueError('строки матрицы разной длинны')
+
+    n, m = len(mat), len(mat[0])
+    trans = []
+    for _ in range(m):
+        trans.append([0] * n)
+
+    for i in range(n):
+        for j in range(m):
+            trans[j][i] = mat[i][j]
+
+    return trans
+
+
+def row_sums(mat: list[list[float | int]]) -> list[float]:
+    '''Сумма по каждому строке
+
+    Args: 
+        mat: Матрица чисел
+
+    Returns:
+        Список сумм по строке
+
+    Raises:
+        ValueError: Строки разной длинны
+    '''
+
+    if not (is_matrix_full(mat)):
+        raise ValueError('строки матрицы разной длинны')
+    return [sum(row) for row in mat]
+
+
+def col_sums(mat: list[list[float | int]]) -> list[float]:
+    '''Сумма по каждому столбцу
+
+    Args:
+        mat: Матрица чисел
+
+    Returns:
+        Список сумм по столбцам
+
+    Raises:
+        ValueError: Строки разной длинны
+    '''
+
+    return [sum(row) for row in transpose(mat)]
+
+
+print('Тест кейсы:')
+print(f'''
+transpose
+
+[[1, 2, 3]] -> {transpose([[1, 2, 3]])}
+[[1], [2], [3]] -> {transpose([[1], [2], [3]])}
+[[1, 2], [3, 4]] -> {transpose([[1, 2], [3, 4]])}
+[] -> {transpose([])}
+''')
+
+# Возвращает ошибку ValueError
+print(f'[[1, 2], [3]] -> {transpose([[1, 2], [3]])}')
