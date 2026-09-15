@@ -1,6 +1,6 @@
-N = int(input())
-data = [list(map(str, input().split())) for i in range(N)]
-ofline = len([student for student in data if student[-1] == 'True'])
-online = N - ofline
+N = int(input('in_1: '))
+data = [list(map(str, input(f'in_{i+2}: ').split())) for i in range(N)]
+offline = len([student for student in data if student[-1] == 'True'])
+online = N - offline
 
-print(ofline, online)
+print(f'out: {offline} {online}')
