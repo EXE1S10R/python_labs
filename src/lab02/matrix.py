@@ -1,4 +1,4 @@
-from scr.lib.often_func import is_matrix_full
+from src.lib.often_func import is_matrix_full
 
 
 def transpose(mat: list[list[float | int]]) -> list[list]:
