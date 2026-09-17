@@ -32,7 +32,7 @@ def transpose(mat: list[list[float | int]]) -> list[list]:
 
 
 def row_sums(mat: list[list[float | int]]) -> list[float]:
-    '''Сумма по каждому строке
+    '''Сумма по каждой строке
 
     Args: 
         mat: Матрица чисел
@@ -74,4 +74,4 @@ transpose
 ''')
 
 # Возвращает ошибку ValueError
-print(f'[[1, 2], [3]] -> {transpose([[1, 2], [3]])}')
+# print(f'[[1, 2], [3]] -> {transpose([[1, 2], [3]])}')
