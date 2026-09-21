@@ -17,7 +17,7 @@ def transpose(mat: list[list[float | int]]) -> list[list]:
         return []
     
     if not (is_matrix_full(mat)):
-        raise ValueError('строки матрицы разной длинны')
+        raise ValueError('строки матрицы разной длины')
 
     n, m = len(mat), len(mat[0])
     trans = []
@@ -41,10 +41,10 @@ def row_sums(mat: list[list[float | int]]) -> list[float]:
         Список сумм по строке
 
     Raises:
-        ValueError: Строки разной длинны
+        ValueError: Строки разной длины
     '''
     if not (is_matrix_full(mat)):
-        raise ValueError('строки матрицы разной длинны')
+        raise ValueError('строки матрицы разной длины')
     return [sum(row) for row in mat]
 
 
@@ -58,7 +58,7 @@ def col_sums(mat: list[list[float | int]]) -> list[float]:
         Список сумм по столбцам
 
     Raises:
-        ValueError: Строки разной длинны
+        ValueError: Строки разной длины
     '''
     return [sum(row) for row in transpose(mat)]
 
