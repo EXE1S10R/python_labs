@@ -11,7 +11,7 @@ def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
         ValueError: Если список пустой
     '''
     if not (len(nums)):
-        raise ValueError ('пустая строка')
+        raise ValueError ('пустой список')
     return (min(nums), max(nums))
 
 

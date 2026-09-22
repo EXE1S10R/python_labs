@@ -24,14 +24,6 @@ def format_record(rec: tuple[str, str, float]) -> str:
     first_flag = 0
 
     # region Вызовы ошибок
-    if not isinstance(rec, tuple):
-        raise TypeError('Запись должна быть кортежем')
-    if not isinstance(rec[0], str):
-        raise TypeError('Имя должно быть строкой')
-    if not isinstance(rec[1], str):
-        raise TypeError('Группа должна быть строкой')
-    if not isinstance(rec[2], float):
-        raise TypeError('Оценка должна быть вещественным числом')
 
     if len(rec) != 3:
         raise ValueError('В кортеже должно быть 3 элемента')
@@ -39,6 +31,15 @@ def format_record(rec: tuple[str, str, float]) -> str:
         raise ValueError('Ведено не полное ФИО')
     if not len(rec[1].strip()):
         raise ValueError('Группа не может быть пустой')
+
+    if not isinstance(rec, tuple):
+        raise TypeError('Запись должна быть кортежем')
+    if not isinstance(rec[0], str):
+        raise TypeError('Имя должно быть строкой')
+    if not isinstance(rec[1], str):
+        raise TypeError('Группа должна быть строкой')
+    if not isinstance(rec[2], (float, int)):
+        raise TypeError('Оценка должна быть вещественным числом')
     # endregion
 
     for word in rec[0].strip('" ').split():
@@ -51,7 +52,7 @@ def format_record(rec: tuple[str, str, float]) -> str:
             name.append(word[0].capitalize() + word[1:] + ' ')
             first_flag = 1
 
-    return f'{''.join(name)}, гр. {rec[1]}, GPA {rec[2]:.2f}'
+    return f"{''.join(name)}, гр. {rec[1]}, GPA {rec[2]:.2f}"
 
 
 print(f'''
