@@ -53,34 +53,34 @@ def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
     '''
     return sorted(freq.items(), key=lambda x: (-x[1], x[0]))[:n]
 
+# if __name__ == '__main__':
+#     print('Тест кейсы:')
 
-print('Тест кейсы:')
+#     print(fr'''
+#     normalize
 
-print(fr'''
-normalize
+#     "ПрИвЕт\nМИр\t" -> {normalize("ПрИвЕт\nМИр\t")}
+#     "ёжик, Ёлка" -> {normalize("ёжик, Ёлка")}
+#     "Hello\r\nWorld" -> {normalize("Hello\r\nWorld")}
+#     "  двойные   пробелы  " -> {normalize("  двойные   пробелы  ")}
+#     ''')
 
-"ПрИвЕт\nМИр\t" -> {normalize("ПрИвЕт\nМИр\t")}
-"ёжик, Ёлка" -> {normalize("ёжик, Ёлка")}
-"Hello\r\nWorld" -> {normalize("Hello\r\nWorld")}
-"  двойные   пробелы  " -> {normalize("  двойные   пробелы  ")}
-''')
+#     print(fr'''
+#     tokenize
 
-print(fr'''
-tokenize
+#     "привет мир" -> {tokenize("привет мир")}
+#     "hello,world!!!" -> {tokenize("hello,world!!!")}
+#     "по-настоящему круто" -> {tokenize("по-настоящему круто")}
+#     "2025 год" -> {tokenize("2025 год")}
+#     "emoji 😀 не слово" -> {tokenize("emoji 😀 не слово")}
+#     ''')
 
-"привет мир" -> {tokenize("привет мир")}
-"hello,world!!!" -> {tokenize("hello,world!!!")}
-"по-настоящему круто" -> {tokenize("по-настоящему круто")}
-"2025 год" -> {tokenize("2025 год")}
-"emoji 😀 не слово" -> {tokenize("emoji 😀 не слово")}
-''')
+#     print(fr'''
+#     count_freq + top_n
 
-print(fr'''
-count_freq + top_n
+#     Токены ["a","b","a","c","b","a"] -> частоты {count_freq(["a", "b", "a", "c", "b", "a"])};
+#     top_n(..., n=2) -> {top_n(count_freq(["a", "b", "a", "c", "b", "a"]), 2)}
 
-Токены ["a","b","a","c","b","a"] -> частоты {count_freq(["a", "b", "a", "c", "b", "a"])};
-top_n(..., n=2) -> {top_n(count_freq(["a", "b", "a", "c", "b", "a"]), 2)}
-
-При равенстве частот: токены ["bb","aa","bb","aa","cc"] -> {count_freq(["bb", "aa", "bb", "aa", "cc"])};
-top_n(..., n=2) → {top_n(count_freq(["bb", "aa", "bb", "aa", "cc"]), 2)}
-''')
+#     При равенстве частот: токены ["bb","aa","bb","aa","cc"] -> {count_freq(["bb", "aa", "bb", "aa", "cc"])};
+#     top_n(..., n=2) → {top_n(count_freq(["bb", "aa", "bb", "aa", "cc"]), 2)}
+#     ''')
