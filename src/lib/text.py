@@ -43,7 +43,7 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
-    '''Выводит топ n слов по частоте обращения
+    '''Выводит тоx n слов по частоте обращения
 
     Args:
         freq: Словарь где указаны слова и количество их повторений
