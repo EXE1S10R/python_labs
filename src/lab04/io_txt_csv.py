@@ -17,8 +17,19 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 
 
 def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    '''Записывает частоты слов в csv файл
+    Args:
+        rows: Список строк которые нужно внести в файл
+        path: Путь к файлу записи
+        header: Заголовок файла
+    
+    Returns:
+        None
+    
+    Raises:
+        ValueError: Строки разной длинны
     '''
-    '''
+    
     etalon = len(rows[0])
     for r in rows:
         if len(r) != etalon:
