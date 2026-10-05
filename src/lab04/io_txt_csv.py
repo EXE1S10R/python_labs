@@ -29,11 +29,12 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
     Raises:
         ValueError: Строки разной длинны
     '''
+    if rows:
+        etalon = len(rows[0])
+        for r in rows:
+            if len(r) != etalon:
+                raise ValueError('Строки разной длинны')
     
-    etalon = len(rows[0])
-    for r in rows:
-        if len(r) != etalon:
-            raise ValueError('Строки разной длинны')
     ensure_parent_dir(path)
     with Path(path).open('w', newline="", encoding="utf-8") as f:
         w = csv.writer(f)

@@ -15,10 +15,10 @@ python -m src.lab04.text_report --in data/b.txt data/a.txt --out data/out.csv
 
 print(args)
 # polygon Xnj nj
-if len(args.output_files) > 1:
+if args.output_files and len(args.output_files) > 1:
     raise ValueError('Сообщено слишком много файлов выхода')
 
-if args.input_files == None:
+if args.input_files is None:
     # region Для одного файла
     file_path = 'data/lab04/input.txt'
     text = read_text(file_path)
@@ -27,7 +27,7 @@ if args.input_files == None:
     words_cnt = count_freq(tokens)
     top_words = top_n(words_cnt)
 
-    if args.output_files == None:
+    if args.output_files is None:
         path = 'data/lab04/report.csv'
     else:
         path = args.output_files[0]
@@ -53,9 +53,10 @@ else:
         normal_text = normalize(text)
         tokens = tokenize(normal_text)
         words_cnt = count_freq(tokens)
-        top_words = top_n(words_cnt)
+        top_all_words = top_n(words_cnt, len(words_cnt))
 
-        for word, count in top_words:
+
+        for word, count in top_all_words:
             per_file.append([file_path, word, count])
 
         for word, count in words_cnt.items():
