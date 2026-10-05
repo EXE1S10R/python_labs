@@ -13,7 +13,6 @@ python -m src.lab04.text_report --in data/b.txt data/a.txt --out data/out.csv
 '''
 # endregion
 
-print(args)
 # polygon Xnj nj
 if args.output_files and len(args.output_files) > 1:
     raise ValueError('Сообщено слишком много файлов выхода')
@@ -35,11 +34,7 @@ if args.input_files is None:
     all_sorted_words = top_n(words_cnt, len(words_cnt))
     write_csv(list(all_sorted_words), path)
 
-    print(f'''
-    Всего слов: {len(tokens)}
-
-    Уникальных слов: {len(set(tokens))}
-    ''')
+    print(f'Всего слов: {len(tokens)} \n \nУникальных слов: {len(set(tokens))} \n')
     for tops in top_words:
         print(f'{tops[0]}:{tops[1]}')
     # endregion
@@ -71,12 +66,7 @@ else:
     total_words = sum(all_cnt.values())
     unique_words = len(s_cnt)
 
-    print(f'''
-Всего слов: {total_words}
-
-Уникальных слов: {unique_words}
-    ''')
-
+    print(f'Всего слов: {total_words} \n \n Уникальных слов: {unique_words}')
     max_len = max(max([len(word[0]) for word in s_cnt[:5]]), len('слово'))
     head = f'{"слово":<{max_len}} | частота'
 
