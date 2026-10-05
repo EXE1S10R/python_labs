@@ -72,9 +72,9 @@ else:
     unique_words = len(s_cnt)
 
     print(f'''
-    Всего слов: {total_words}
+Всего слов: {total_words}
 
-    Уникальных слов: {unique_words}
+Уникальных слов: {unique_words}
     ''')
 
     max_len = max(max([len(word[0]) for word in s_cnt[:5]]), len('слово'))
