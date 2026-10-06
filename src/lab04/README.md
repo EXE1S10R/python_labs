@@ -108,7 +108,6 @@ python -m src.lab04.text_report --in data/b.txt data/a.txt --out data/out.csv
 '''
 # endregion
 
-# polygon Xnj nj
 if args.output_files and len(args.output_files) > 1:
     raise ValueError('Сообщено слишком много файлов выхода')
 
