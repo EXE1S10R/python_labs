@@ -10,13 +10,18 @@
     "city": "Moscow"
   },
   {
-    "name": "Charlie",
+    "name": "Carlos",
     "age": 30,
     "city": "Kazan"
   },
   {
-    "name": "Diana",
-    "age": 28,
-    "city": "Sochi"
+    "name": "Dana",
+    "age": 21,
+    "city": "SPB"
+  },
+  {
+    "name": "Andrey",
+    "age": 27,
+    "city": "Novosibirsk"
   }
 ]
