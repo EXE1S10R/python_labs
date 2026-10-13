@@ -4,11 +4,32 @@ from pathlib import Path
 from lib.often_func import ensure_parent_dir
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
+    '''Записывает значения
+
+    Args:
+        json_path: Путь к json файлу из которого читаем
+        csv_path: Путь к csv файлу из куда пишем
+
+    Returns: 
+        None
+    
+    Raises:
+        FileNotFoundError: 
+            Указанный JSON файл не найден
+        ValueError:
+            Указанный файл не формата JSON
+            Пустой JSON или неподдерживаемая структура
+            Файл JSON пустой или имеет неправильный формат
+            Все элементы списка JSON должны быть словарями
+    '''
     jp = Path(json_path)
     cp = Path(csv_path)
 
     if not jp.exists():
         raise FileNotFoundError("Указанный JSON файл не найден")
+
+    if jp.suffix.lower != '.json':
+        raise ValueError("Указанный файл не формата JSON")
 
     with jp.open('r', encoding='utf-8') as p:
         try:
@@ -34,11 +55,31 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 
 # json_to_csv(r'data\lab05\samples\people.json', r'data\lab05\out\people_from_json.csv')
 def csv_to_json(csv_path: str, json_path:str) -> None:
+    '''Записывает значения
+
+    Args:
+        csv_path: Путь к csv файлу из куда пишем
+        json_path: Путь к json файлу из которого читаем
+
+    Returns: 
+        None
+    
+    Raises:
+        FileNotFoundError: 
+            Указанный CSV файл не найден
+        ValueError:
+            Указанный файл не формата CSV
+            Файл CSV пустой
+            Файл CSV не содержит данных
+    '''
     jp = Path(json_path)
     cp = Path(csv_path)
 
     if not cp.exists():
         raise FileNotFoundError("Указанный CSV файл не найден")
+
+    if jp.suffix.lower != '.csv':
+        raise ValueError("Указанный файл не формата CSV")
 
     with cp.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
