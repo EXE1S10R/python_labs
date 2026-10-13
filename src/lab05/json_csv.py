@@ -8,7 +8,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 
     Args:
         json_path: Путь к json файлу из которого читаем
-        csv_path: Путь к csv файлу из куда пишем
+        csv_path: Путь к csv файлу куда пишем
 
     Returns: 
         None
@@ -28,7 +28,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     if not jp.exists():
         raise FileNotFoundError("Указанный JSON файл не найден")
 
-    if jp.suffix.lower != '.json':
+    if jp.suffix.lower() != '.json':
         raise ValueError("Указанный файл не формата JSON")
 
     with jp.open('r', encoding='utf-8') as p:
@@ -58,8 +58,8 @@ def csv_to_json(csv_path: str, json_path:str) -> None:
     '''Записывает значения
 
     Args:
-        csv_path: Путь к csv файлу из куда пишем
-        json_path: Путь к json файлу из которого читаем
+        csv_path: Путь к csv файлу из которого читаем
+        json_path: Путь к json файлу куда пишем
 
     Returns: 
         None
@@ -78,7 +78,7 @@ def csv_to_json(csv_path: str, json_path:str) -> None:
     if not cp.exists():
         raise FileNotFoundError("Указанный CSV файл не найден")
 
-    if jp.suffix.lower != '.csv':
+    if cp.suffix.lower() != '.csv':
         raise ValueError("Указанный файл не формата CSV")
 
     with cp.open("r", newline="", encoding="utf-8") as f:

@@ -22,19 +22,19 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
         rows: Список строк которые нужно внести в файл
         path: Путь к файлу записи
         header: Заголовок файла
-    
+
     Returns:
         None
-    
+
     Raises:
-        ValueError: Строки разной длинны
+        ValueError: Строки разной длины
     '''
     if rows:
         etalon = len(rows[0])
         for r in rows:
             if len(r) != etalon:
-                raise ValueError('Строки разной длинны')
-    
+                raise ValueError('Строки разной длины')
+
     ensure_parent_dir(path)
     with Path(path).open('w', newline="", encoding="utf-8") as f:
         w = csv.writer(f)

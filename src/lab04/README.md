@@ -101,10 +101,13 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--in', nargs='+', dest='input_files')
 parser.add_argument('--out', nargs='+', dest='output_files')
+parser.add_argument('--encoding', default='utf-8')
+parser.add_argument('--per-file', default='data/lab04/report_per_file.csv')
+parser.add_argument('--total', default='data/lab04/report_total.csv')
 args = parser.parse_args()
 '''
-python -m src.lab04.text_report --in data/b.txt data/a.txt --out data/out.csv
-Это короче крутая команда для вызова чтобы я не забыл
+Пример вызова:
+python -m src.lab04.text_report --in data/b.txt data/a.txt --encoding cp1251 --per-file data/report_per_file.csv --total data/report_total.csv
 '''
 # endregion
 
@@ -114,7 +117,7 @@ if args.output_files and len(args.output_files) > 1:
 if args.input_files is None:
     # region Для одного файла
     file_path = 'data/lab04/input.txt'
-    text = read_text(file_path)
+    text = read_text(file_path, encoding=args.encoding)
     normal_text = normalize(text)
     tokens = tokenize(normal_text)
     words_cnt = count_freq(tokens)
@@ -126,7 +129,7 @@ if args.input_files is None:
         path = args.output_files[0]
 
     all_sorted_words = top_n(words_cnt, len(words_cnt))
-    write_csv(list(all_sorted_words), path)
+    write_csv(list(all_sorted_words), path, header=('word', 'count'))
 
     print(f'Всего слов: {len(tokens)} \n \nУникальных слов: {len(set(tokens))} \n')
     for tops in top_words:
@@ -138,7 +141,7 @@ else:
     all_cnt = {} # А тут лежит словарь где указаны частоты всех слов
 
     for file_path in sorted(args.input_files): # Тут шедевроцикл где я прохожусь по файлам
-        text = read_text(file_path)
+        text = read_text(file_path, encoding=args.encoding)
         normal_text = normalize(text)
         tokens = tokenize(normal_text)
         words_cnt = count_freq(tokens)
@@ -154,24 +157,37 @@ else:
 
     # region Итоговая запись
     s_cnt = top_n(all_cnt, len(all_cnt)) # Это чтобы отсортировать словарь
-    write_csv(per_file, 'data/lab04/report_per_file.csv', header=('file','word','count'))
-    write_csv(list(s_cnt), 'data/lab04/report_total.csv', header=('word','count'))
+    write_csv(per_file, args.per_file, header=('file', 'word', 'count'))
+    write_csv(list(s_cnt), args.total, header=('word', 'count'))
 
     total_words = sum(all_cnt.values())
     unique_words = len(s_cnt)
 
-    print(f'Всего слов: {total_words} \n \n Уникальных слов: {unique_words}')
-    max_len = max(max([len(word[0]) for word in s_cnt[:5]]), len('слово'))
+    print(f'Всего слов: {total_words} \n \nУникальных слов: {unique_words}')
+
+    top5 = s_cnt[:5]
+    if top5:
+        max_len = max(max([len(word[0]) for word in top5]), len('слово'))
+    else:
+        max_len = len('слово')
     head = f'{"слово":<{max_len}} | частота'
 
     print(head)
     print('-' * len(head))
-    for top in s_cnt[:5]:
+    for top in top5:
         print(f'{top[0]:<{max_len}} | {top[1]}')
     print('...')
-    # А тут был красивый вывод (см наверх)
     # endregion
 ```
+
+Скрипт поддерживает следующие параметры:
+
+- `--in` — один или несколько входных файлов. Если параметр не указан, используется
+  `data/lab04/input.txt`;
+- `--out` — путь к отчету для режима одного файла;
+- `--encoding` — кодировка входных файлов, по умолчанию `utf-8`;
+- `--per-file` — путь к отчету по отдельным файлам в режиме нескольких файлов;
+- `--total` — путь к сводному отчету в режиме нескольких файлов.
 
 ### Пример запуска для одного файла
 
@@ -192,6 +208,8 @@ python -m src.lab04.text_report --in data/lab04/a.txt data/lab04/b.txt
 ```
 
 В этом режиме отдельно создаются `report_per_file.csv` и `report_total.csv`.
+В консоли выводятся общее количество слов, число уникальных слов и пять самых
+частотных слов. Для пустого набора слов скрипт также выполняется без ошибки.
 
 ![Запуск скрипта для нескольких файлов](../../images/lab04/t2console.png)
 
@@ -201,8 +219,8 @@ python -m src.lab04.text_report --in data/lab04/a.txt data/lab04/b.txt
 
 ```csv
 file,word,count
-data/lab04/a.txt,привет,1
 data/lab04/a.txt,мир,1
+data/lab04/a.txt,привет,1
 data/lab04/b.txt,привет,2
 ```
 
