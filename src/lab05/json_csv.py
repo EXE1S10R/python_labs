@@ -1,7 +1,8 @@
 import json
 import csv
 from pathlib import Path
-from lib.often_func import ensure_parent_dir
+from src.lib.often_func import ensure_parent_dir
+
 
 def json_to_csv(json_path: str, csv_path: str) -> None:
     '''Записывает значения
@@ -12,7 +13,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
 
     Returns: 
         None
-    
+
     Raises:
         FileNotFoundError: 
             Указанный JSON файл не найден
@@ -41,7 +42,7 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         raise ValueError('Файл JSON пустой или имеет неправильный формат')
     if not all(isinstance(item, dict) for item in data):
         raise ValueError("Все элементы списка JSON должны быть словарями")
-    
+
     ensure_parent_dir(cp)
     fieldnames = {}
     for element in data:
@@ -54,7 +55,9 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         w.writerows(data)
 
 # json_to_csv(r'data\lab05\samples\people.json', r'data\lab05\out\people_from_json.csv')
-def csv_to_json(csv_path: str, json_path:str) -> None:
+
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
     '''Записывает значения
 
     Args:
@@ -63,7 +66,7 @@ def csv_to_json(csv_path: str, json_path:str) -> None:
 
     Returns: 
         None
-    
+
     Raises:
         FileNotFoundError: 
             Указанный CSV файл не найден
@@ -85,14 +88,21 @@ def csv_to_json(csv_path: str, json_path:str) -> None:
         reader = csv.DictReader(f)
         if reader.fieldnames is None:
             raise ValueError("Файл CSV пустой")
-        
+
         data = list(reader)
 
     if not data:
         raise ValueError("Файл CSV не содержит данных")
-    
+
     ensure_parent_dir(jp)
     with jp.open('w', encoding='utf-8') as p:
         json.dump(data, p, ensure_ascii=False, indent=2)
 
 # csv_to_json(r'data\lab05\samples\people.csv', r'data\lab05\out\people_from_csv.json')
+
+
+if __name__ == '__main__':
+    csv_to_json(r'data\lab05\samples\people.csv',
+                r'data\lab05\out\people_from_csv.json')
+    json_to_csv(r'data\lab05\samples\people.json',
+                r'data\lab05\out\people_from_json.csv')

@@ -53,4 +53,8 @@ def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
 
         ws.column_dimensions[letter].width = max(max_len, 8)
 
+    ensure_parent_dir(xlp)
     wb.save(xlp)
+
+if __name__ == '__main__':
+    csv_to_xlsx(r"data/lab05/samples/people.csv", r"data/lab05/out/people.xlsx")
