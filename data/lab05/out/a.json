@@ -1,0 +1,27 @@
+[
+  {
+    "city": "SPB",
+    "country": "Russia",
+    "population": "5384342"
+  },
+  {
+    "city": "Moscow",
+    "country": "Russia",
+    "population": "False"
+  },
+  {
+    "city": "Kazan",
+    "country": "Russia",
+    "population": "1306953"
+  },
+  {
+    "city": "Novosibirsk",
+    "country": null,
+    "population": "1620162"
+  },
+  {
+    "city": "Yekaterinburg",
+    "country": "Russia",
+    "population": "1493749"
+  }
+]
