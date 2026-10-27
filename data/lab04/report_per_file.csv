@@ -1,4 +1,7 @@
 file,word,count
-data/lab04/a.txt,мир,1
-data/lab04/a.txt,привет,1
-data/lab04/b.txt,привет,2
+data/lab04/input.txt,алго,1
+data/lab04/input.txt,в,1
+data/lab04/input.txt,клаймб,1
+data/lab04/input.txt,лучшая,1
+data/lab04/input.txt,мире,1
+data/lab04/input.txt,платформа,1

@@ -14,16 +14,6 @@ import csv
 
 
 def read_text(path: str | Path, encoding: str = "utf-8") -> str:
-    '''Считывает текст по указанному пути
-
-    Args:
-        path: Путь к файлу в формате строки или Path
-        encoding: Тип кодировки файла (пример: encoding="cp1251"), по умолчанию utf-8
-
-    Returns:
-        Прочитанный файл в виде строки
-    '''
-
     return Path(path).read_text(encoding=encoding)
 ```
 
@@ -35,18 +25,6 @@ def read_text(path: str | Path, encoding: str = "utf-8") -> str:
 
 ```python
 def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
-    '''Записывает частоты слов в csv файл
-    Args:
-        rows: Список строк которые нужно внести в файл
-        path: Путь к файлу записи
-        header: Заголовок файла
-
-    Returns:
-        None
-
-    Raises:
-        ValueError: Строки разной длинны
-    '''
     if rows:
         etalon = len(rows[0])
         for r in rows:
@@ -70,21 +48,12 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
 
 ```python
 def ensure_parent_dir(path: str | Path) -> None:
-    '''Проверяет наличие родительских папок, если их нет, то создает их
-    Args:
-        path: Путь к файлу в формате строки или Path
-
-    Returns:
-        None
-    '''
-
     Path(path).parent.mkdir(parents=True, exist_ok=True)
 ```
 
 ![Работа с TXT и CSV](../../images/lab04/t1csv.png)
 
 *Рис. 1. Результат записи данных в CSV-файл.*
-
 
 ## Задание B — скрипт статистики `src/lab04/text_report.py`
 

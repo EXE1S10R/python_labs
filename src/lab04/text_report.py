@@ -36,7 +36,7 @@ if args.input_files is None:
     all_sorted_words = top_n(words_cnt, len(words_cnt))
     write_csv(list(all_sorted_words), path, header=('word', 'count'))
 
-    print(f'Всего слов: {len(tokens)} \n \nУникальных слов: {len(set(tokens))} \n')
+    print(f'Всего слов: {len(tokens)} \n \nУникальных слов: {len(set(tokens))} \n Топ-5: \n')
     for tops in top_words:
         print(f'{tops[0]}:{tops[1]}')
     # endregion
