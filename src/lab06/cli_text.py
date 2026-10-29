@@ -4,7 +4,7 @@ from src.lib.text import normalize, tokenize, count_freq, top_n
 
 def main():
     parser = argparse.ArgumentParser(description='CLI-утилиты для lab06')
-    subparsers = parser.add_subparsers(dest='command')
+    subparsers = parser.add_subparsers(dest='command', required=True)
 
     cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
     cat_parser.add_argument("--input", required=True)
@@ -36,6 +36,8 @@ def main():
     elif args.command == 'stats':
         path = Path(args.input)
 
+        if int(args.top) < 0:
+            raise ValueError("Топ не может быть отрицательным")
         if not path.exists():
             raise FileNotFoundError(f'Нет файла по указанному пути: {path}')
         
