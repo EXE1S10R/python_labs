@@ -26,9 +26,11 @@ def main():
             data = f.readlines()
 
         if args.n:
-            [print(f'{i+1:>4}\t{data[i]}', end='') for i in range(len(data))] 
+            for i in range(len(data)):
+                 print(f'{i+1:>4}\t{data[i]}', end='')
         else:
-            [print(data[i], end='') for i in range(len(data))]
+            for i in range(len(data)):
+                 print(data[i], end='')
 
    
     elif args.command == 'stats':
