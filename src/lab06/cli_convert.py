@@ -5,6 +5,24 @@ import argparse
 
 
 def main():
+    ''' Конвертирует CLI
+
+    Args:
+        json2csv: Переводит JSON в CSV
+            --in: Путь к входному JSON !обязательно!
+            --out: Путь к выходному CSV !обязательно!
+
+        csv2json: Переводит CSV в JSON
+            --in: Путь к входному CSV !обязательно!
+            --out: Путь к выходному JSON !обязательно!
+
+        csv2xlsx: Переводит JSON в CSV
+            --in: Путь к входному CSV !обязательно!
+            --out: Путь к выходному XLSX !обязательно!
+    
+    Returns: 
+        None: Изменяются файлы по указанным путям
+    '''
     parser = argparse.ArgumentParser(description="CLI-конвертеры данных для lab06")
     sub = parser.add_subparsers(dest="command", required=True)
 

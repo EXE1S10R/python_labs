@@ -3,6 +3,30 @@ from pathlib import Path
 from src.lib.text import normalize, tokenize, count_freq, top_n
 
 def main():
+    '''Выводит статистику по тексту или выводит содержимое файла
+
+    Args:
+        cat: Вывод содержимого
+            --input: Путь к файлу !обязательно!
+            -n: Нумерация строк (по умолчанию False)
+        
+        stats: Вывод частот слов
+            --input: Путь к файлу !обязательно!
+            -top: Количество отображаемых элементов в топе 
+    
+    Returns:
+        None: Выводит в консоль
+    
+    Raises:
+        cat:
+            FileNotFoundError: Нет файла по указанному пути
+
+        stats:
+            ValueError: Топ не может быть отрицательным
+            FileNotFoundError: Нет файла по указанному пути
+
+        Все остальные ошибки вызываются и обрабатываются в вызываемых функциях
+    '''
     parser = argparse.ArgumentParser(description='CLI-утилиты для lab06')
     subparsers = parser.add_subparsers(dest='command', required=True)
 
