@@ -1,4 +1,4 @@
-def linear_search(nums: list, x: int) -> int:
+def linear_search(nums: list[int], x: int) -> int:
     '''Линейная сортировка
 
     Args:
@@ -17,7 +17,7 @@ def linear_search(nums: list, x: int) -> int:
     return -1
 
 
-def binary_search(sorted_nums: list, x: int) -> int:
+def binary_search(sorted_nums: list[int], x: int) -> int:
     '''Бинарный поиск
 
     Args:
@@ -46,7 +46,7 @@ def binary_search(sorted_nums: list, x: int) -> int:
     return -1
 
 
-def two_sum_brute(nums: list, target: int) -> tuple[int, int] | None:
+def two_sum_brute(nums: list[int], target: int) -> tuple[int, int] | None:
     '''Поиск двух элементов с искомой суммой (долгий вложенный цикл)
 
     Args:
@@ -66,7 +66,7 @@ def two_sum_brute(nums: list, target: int) -> tuple[int, int] | None:
                 return (min(i, j), max(i, j))
 
 
-def two_sum_fast(nums: list, target: int) -> tuple[int, int] | None:
+def two_sum_fast(nums: list[int], target: int) -> tuple[int, int] | None:
     '''Поиск двух элементов с искомой суммой (быстрый словарь)
 
     Args:
