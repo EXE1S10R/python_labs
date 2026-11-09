@@ -9,13 +9,13 @@
 Подкоманда выводит содержимое текстового файла построчно.
 
 ```powershell
-python -m src.lab06.cli_text cat --input data\lab04\input.txt
+python -m src.lab06.cli_text cat --input data/lab04/input.txt
 ```
 
 Для нумерации строк используется флаг `-n`:
 
 ```powershell
-python -m src.lab06.cli_text cat --input data\lab04\input.txt -n
+python -m src.lab06.cli_text cat --input data/lab04/input.txt -n
 ```
 
 Параметры:
@@ -40,13 +40,13 @@ python -m src.lab06.cli_text cat --input data\lab04\input.txt -n
 Запуск с количеством слов по умолчанию:
 
 ```powershell
-python -m src.lab06.cli_text stats --input data\lab04\input.txt
+python -m src.lab06.cli_text stats --input data/lab04/input.txt
 ```
 
 Запуск с собственным размером топа:
 
 ```powershell
-python -m src.lab06.cli_text stats --input data\lab04\input.txt --top 5
+python -m src.lab06.cli_text stats --input data/lab04/input.txt --top 5
 ```
 
 Параметры:
@@ -78,8 +78,8 @@ python -m src.lab06.cli_text stats --input data\lab04\input.txt --top 5
 
 ```powershell
 python -m src.lab06.cli_convert json2csv `
-  --in data\lab05\samples\people.json `
-  --out data\lab05\out\people_from_json.csv
+  --in data/lab05/samples/people.json `
+  --out data/lab05/out/people_from_json.csv
 ```
 
 ![Справка json2csv](../../images/lab06/json2csv_help.png)
@@ -96,8 +96,8 @@ python -m src.lab06.cli_convert json2csv `
 
 ```powershell
 python -m src.lab06.cli_convert csv2json `
-  --in data\lab05\samples\people.csv `
-  --out data\lab05\out\people_from_csv.json
+  --in data/lab05/samples/people.csv `
+  --out data/lab05/out/people_from_csv.json
 ```
 
 ![Запуск csv2json](../../images/lab06/cli_convert_csv2json.png)
@@ -110,8 +110,8 @@ python -m src.lab06.cli_convert csv2json `
 
 ```powershell
 python -m src.lab06.cli_convert csv2xlsx `
-  --in data\lab05\samples\people.csv `
-  --out data\lab05\out\people.xlsx
+  --in data/lab05/samples/people.csv `
+  --out data/lab05/out/people.xlsx
 ```
 
 ![Запуск csv2xlsx](../../images/lab06/cli_convert_csv2xlsx.png)
