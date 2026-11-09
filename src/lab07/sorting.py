@@ -1,6 +1,6 @@
 def bubble_sort(nums: list[int]) -> list[int]:
     ''' Оптимизированная сортировка пузырьком
-        есть ранний выход при отсортированном списке
+        ★ есть ранний выход при отсортированном списке
 
     Args:
         nums: Список чисел
@@ -79,3 +79,4 @@ def insertion_sort(nums: list[int]) -> list[int]:
         arr[j + 1] = key
 
     return arr
+
