@@ -60,10 +60,12 @@ def two_sum_brute(nums: list[int], target: int) -> tuple[int, int] | None:
     Complexity:
         O(n**2): Квадратичная сложность
     '''
-    for i in nums:
-        for j in nums:
-            if i != j and i + j == target:
-                return (min(i, j), max(i, j))
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] + nums[j] == target:
+                return (i, j)
+    return None
 
 
 def two_sum_fast(nums: list[int], target: int) -> tuple[int, int] | None:
@@ -85,6 +87,6 @@ def two_sum_fast(nums: list[int], target: int) -> tuple[int, int] | None:
         x = nums[i]
         find = target - x
         if find in past:
-            return (min(find, x), max(find, x))
-        else:
-            past[x] = i
+            return (past[find], i)
+        past[x] = i
+    return None
