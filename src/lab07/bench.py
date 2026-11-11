@@ -2,7 +2,7 @@ import csv
 import timeit
 import random
 from src.lab04.io_txt_csv import write_csv
-from src.lab07.sorting import bubble_sort, insertion_sort, selection_sort
+from src.lab07.sorting import bubble_sort, insertion_sort, selection_sort, counting_sort, merge_sort
 from src.lab07.search import linear_search, binary_search, two_sum_brute, two_sum_fast
 
 
@@ -13,6 +13,11 @@ def bench_sorts(n: int) -> list[tuple]:
     t_sorted = min(timeit.repeat(
         lambda: sorted(data), number=100, repeat=5)) / 100
     rows.append(("sort", n, "sorted", t_sorted))
+
+    r_count = 5 if n < 100000 else 1
+    t_merge = min(timeit.repeat(
+        lambda: merge_sort(data), number=1, repeat=r_count))
+    rows.append(("sort", n, "merge_sort", t_merge))
 
     if n >= 100000:
         rows.append(("sort", n, "bubble_sort", "> 60.0"))
@@ -31,6 +36,22 @@ def bench_sorts(n: int) -> list[tuple]:
         t_selection = min(timeit.repeat(
             lambda: selection_sort(data), number=1, repeat=5))
         rows.append(("sort", n, "selection_sort", t_selection))
+
+    return rows
+
+
+def bench_counting() -> list[tuple]:
+    rows = []
+    n = 1000000
+    lo, hi = 0, 100
+    data = [random.randint(lo, hi) for _ in range(n)]
+
+    t_sorted = min(timeit.repeat(lambda: sorted(data), number=5, repeat=3)) / 5
+    rows.append(("count", n, "sorted", t_sorted))
+
+    t_count = min(timeit.repeat(lambda: counting_sort(
+        data, lo, hi), number=5, repeat=3)) / 5
+    rows.append(("count", n, "counting_sort", t_count))
 
     return rows
 
@@ -67,8 +88,8 @@ def bench_two_sum(n: int) -> list[tuple]:
     rows = []
     data = random.sample(range(-100000, 100000), n)
     n1, n2 = random.randint(0, len(data)-1), random.randint(0, len(data)-1)
-    if n1 == n2: 
-        if n2 + 1 < len(data): 
+    if n1 == n2:
+        if n2 + 1 < len(data):
             n2 += 1
         else:
             n2 -= 1
@@ -93,6 +114,9 @@ if __name__ == "__main__":
     for n in [1000, 10000, 100000]:
         all_rows.extend(bench_sorts(n))
 
+    print("Бенчмаркаю Counting Sort...")
+    all_rows.extend(bench_counting())
+
     print("Бенчмаркаю поиски...")
     all_rows.extend(bench_search(100000))
 
@@ -109,8 +133,9 @@ if __name__ == "__main__":
             sec_str = seconds
         else:
             sec_str = f"{seconds:.6f}"
-        
+
         print(f"{task:<10} | {n:<10} | {impl:<15} | {sec_str}")
 
-    write_csv(all_rows, "data/lab07/bench.csv", header=("task", "n", "impl", "seconds"))
+    write_csv(all_rows, "data/lab07/bench.csv",
+              header=("task", "n", "impl", "seconds"))
     print("\nРезультаты сохранены в data/lab07/bench.csv")
