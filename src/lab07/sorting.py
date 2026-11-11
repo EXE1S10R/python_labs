@@ -80,3 +80,50 @@ def insertion_sort(nums: list[int]) -> list[int]:
 
     return arr
 
+def merge_sort(nums: list[int]) -> list[int]:
+    '''★ Сортировка слиянием (без рекурсии)
+
+    Args:
+        nums: Список чисел
+
+    Returns:
+        arr: Отсортированный список чисел
+
+    Complexity:
+        O(n log n): Линейно-логарифмическая сложность
+    '''
+    arr = list(nums)
+    n = len(arr)
+    step = 1
+
+    while step < n:
+        for left in range(0, n, 2 * step):
+            mid = left + step
+            right = min(left + 2 * step, n)
+
+            if mid >= n:
+                continue
+
+            merged = []
+            i, j = left, mid
+
+            while i < mid and j < right:
+                if arr[i] <= arr[j]:
+                    merged.append(arr[i])
+                    i += 1
+                else:
+                    merged.append(arr[j])
+                    j += 1
+
+            while i < mid:
+                merged.append(arr[i])
+                i += 1
+            while j < right:
+                merged.append(arr[j])
+                j += 1
+
+            arr[left:right] = merged
+            
+        step *= 2
+
+    return arr
