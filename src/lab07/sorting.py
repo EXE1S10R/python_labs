@@ -80,6 +80,7 @@ def insertion_sort(nums: list[int]) -> list[int]:
 
     return arr
 
+
 def merge_sort(nums: list[int]) -> list[int]:
     '''★ Сортировка слиянием (без рекурсии)
 
@@ -123,7 +124,33 @@ def merge_sort(nums: list[int]) -> list[int]:
                 j += 1
 
             arr[left:right] = merged
-            
+
         step *= 2
 
     return arr
+
+
+def counting_sort(nums: list[int], lo: int, hi: int) -> list[int]:
+    '''★ Сортировка подсчетом для целых чисел в диапазоне [lo, hi]
+
+    Args:
+        nums: Список чисел
+        lo: Минимально возможное значение
+        hi: Максимально возможное значение
+
+    Returns:
+        res: Отсортированный список чисел
+
+    Complexity:
+        O(n + k): Линейная сложность, k = (hi - lo)
+    '''
+    count = [0] * (hi - lo + 1)
+
+    for x in nums:
+        count[x - lo] += 1
+
+    res = []
+    for i in range(len(count)):
+        res.extend([lo + i] * count[i])
+
+    return res
