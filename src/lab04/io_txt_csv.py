@@ -46,6 +46,7 @@ def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...
 
 def ensure_parent_dir(path: str | Path) -> None:
     '''Проверяет наличие родительских папок, если их нет, то создает их
+    
     Args:
         path: Путь к файлу в формате строки или Path
 
