@@ -217,3 +217,32 @@ def student_from_dict(d: dict) -> dict:
         group=d["group"],
         gpa=d["gpa"],
     )
+
+
+def update_student(rec: dict, **fields) -> dict:
+    '''★ Новая запись студента.
+
+    Args:
+        rec: Исходный словарь
+        **fields: Поля для обновления !только из STUDENT_FIELDS!
+
+    Returns:
+        Новый словарь-запись
+
+    Raises:
+        KeyError: Неизвестное поле записи Student: '{key}'
+        ValueError: Если исходная запись или новые значения невалидны
+    '''
+    validate_student(rec)
+
+    for key in fields:
+        if key not in STUDENT_FIELDS:
+            raise KeyError(f"Неизвестное поле записи Student: '{key}'")
+
+    updated = {**rec, **fields}
+    return make_student(
+        fio=updated["fio"],
+        birthdate=updated["birthdate"],
+        group=updated["group"],
+        gpa=updated["gpa"],
+    )

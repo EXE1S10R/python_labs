@@ -67,3 +67,58 @@ def students_from_json(path: str | Path) -> list[dict]:
             raise ValueError(f"Ошибка при записи №{i + 1}: {e}") from e
 
     return students
+
+
+import csv
+from src.lab08.models import STUDENT_FIELDS, student_from_dict, student_to_dict
+
+
+def students_from_csv(path: str | Path) -> list[dict]:
+    '''★ Читает список студентов из CSV (политика strict).
+        Поле gpa приводится из строки к float на этапе чтения из CSV.
+
+    Args:
+        path: Путь к CSV
+
+    Returns:
+        Список  словарей-записей
+
+    Raises:
+        FileNotFoundError: Файл не найден
+        ValueError: 
+            Неверный заголовок CSV
+            Строка {idx + 1}: лишние столбцы в CSV
+            Строка {idx + 1}: 'gpa' должно быть числом
+            Строка {idx + 1}: {e}
+    '''
+    file_path = Path(path)
+
+    with file_path.open("r", encoding="utf-8", newline="") as f:
+        reader = csv.DictReader(f)
+
+        if reader.fieldnames is None:
+            return []
+
+        if set(reader.fieldnames) != set(STUDENT_FIELDS):
+            raise ValueError(f"Неверный заголовок CSV: {reader.fieldnames}. Ожидалось: {list(STUDENT_FIELDS)}")
+
+        students = []
+        for idx, row in enumerate(reader, start=1):
+            if None in row:
+                raise ValueError(f"Строка {idx + 1}: лишние столбцы в CSV")
+
+            raw_gpa = row.get("gpa")
+            if raw_gpa is None or not raw_gpa.strip():
+                raise ValueError(f"Строка {idx + 1}: отсутствует значение 'gpa'")
+
+            try:
+                row["gpa"] = float(raw_gpa)
+            except ValueError:
+                raise ValueError(f"Строка {idx + 1}: 'gpa' должно быть числом" )
+
+            try:
+                students.append(student_from_dict(row))
+            except ValueError as e:
+                raise ValueError(f"Строка {idx + 1}: {e}") from e
+
+    return students
